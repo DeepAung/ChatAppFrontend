@@ -1,0 +1,48 @@
+.navbarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 10%;
+  padding: 0 2vw;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  transition: color 0.25s;
+}
+
+.title:hover {
+  color: var(--third-color);
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.username {
+  font-size: 2rem;
+  font-weight: 500;
+  transition: color 0.25s;
+  margin-right: 3rem;
+}
+
+.username:hover {
+  color: var(--third-color);
+}
+
+.btn {
+  font-size: 1.1rem;
+  font-weight: 500;
+
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--fourth-color);
+  background-color: var(--second-color);
+
+  cursor: pointer;
+}

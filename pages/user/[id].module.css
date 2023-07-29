@@ -1,0 +1,134 @@
+.container {
+  display: flex;
+  padding: 3rem;
+}
+
+.img {
+  width: auto;
+  height: 70vh;
+  display: block;
+  margin-right: 5rem;
+
+  border-radius: 0.5rem;
+}
+
+.info {
+  width: 100%;
+}
+
+.info > * {
+  margin-bottom: 2rem;
+}
+
+.info h1 {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.info h3 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.info p {
+  font-size: 1rem;
+}
+
+.info .section > * {
+  white-space: pre-wrap;
+}
+
+.info .section > *:first-child::before {
+  position: absolute;
+  left: -1em;
+  content: "# ";
+  color: var(--third-color);
+
+  display: none;
+}
+
+.info .section > *:first-child:hover::before {
+  display: inline;
+}
+
+/* -------------------- isEditing section -------------------- */
+
+.info .wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 0;
+}
+
+.info .wrapper .field {
+  margin-bottom: 2rem;
+}
+
+.info .field > * {
+  display: block;
+  font-size: large;
+}
+
+.info .field span {
+  margin-bottom: 0.5rem;
+}
+
+.info input[type="text"],
+.info textarea {
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: none;
+
+  color: black;
+  background-color: var(--fourth-color);
+
+  width: 20vw;
+}
+
+.info textarea {
+  resize: vertical;
+  width: 25vw;
+}
+
+.info input[type="submit"],
+.info button {
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+  font-size: large;
+
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+
+  margin-right: 1.5rem;
+  cursor: pointer;
+}
+
+.info input[type="submit"] {
+  color: var(--fourth-color);
+  background-color: var(--second-color);
+}
+
+.info button {
+  color: var(--first-color);
+  background-color: var(--fourth-color);
+}
+
+.info label {
+  color: black;
+  background-color: var(--fourth-color);
+
+  font-weight: 600;
+  
+  display: inline-block !important;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+
+  transition: color 0.25s ease-out, background-color 0.25s ease-out;
+}
+
+.info label:hover {
+  color: var(--fourth-color);
+  background-color: var(--second-color);
+}

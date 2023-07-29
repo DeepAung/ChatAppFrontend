@@ -1,0 +1,95 @@
+.container {
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: clamp(25rem, 50% + 5rem, 40rem);
+  margin: auto;
+  text-align: center;
+  align-items: center;
+
+  background-color: var(--fourth-color);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.form > * {
+  display: block;
+  margin: auto;
+  color: black;
+}
+
+.form > h1 {
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.form input {
+  margin-bottom: 1rem;
+  font-size: large;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.form .inputForm {
+  position: relative;
+  margin-inline: auto;
+  width: 50%;
+}
+
+.form .inputForm span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 999;
+
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.form .inputForm span .icon {
+  cursor: pointer;
+}
+
+.form .inputForm input {
+  padding: 0.75rem;
+  display: block;
+  width: 100%;
+}
+
+.form .submitBtn {
+  padding: 1rem 1.5rem;
+  font-size: x-large;
+  cursor: pointer;
+  
+  background-color: var(--second-color);
+  color: var(--fourth-color);
+
+  margin: 1.5rem auto;
+}
+
+.form > p > * {
+  color: var(--third-color);
+  font-weight: 700;
+  margin-left: 0.25rem;
+}
+
+.form > p > *:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.1rem;
+}
+
+.errList {
+  margin-top: 2rem;
+  color: rgb(214, 0, 0);
+  font-size: large;
+}
+
+.errList p span {
+  font-weight: 600;
+}

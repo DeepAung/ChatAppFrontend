@@ -1,0 +1,73 @@
+.sideBar {
+  padding: 1rem;
+}
+
+.joinRoom {
+  margin-bottom: 1rem;
+}
+
+.joinRoom form {
+  border-radius: 1rem;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.joinRoom form input {
+  display: block;
+  height: 100%;
+  width: 100%;
+
+  border: none;
+  outline: none;
+  padding: 0.5rem 1rem;
+
+  font-size: 1rem;
+}
+
+.joinRoom form input[type="submit"] {
+  cursor: pointer;
+  color: white;
+  background-color: var(--second-color);
+}
+
+.errMsg {
+  text-align: center;
+  margin-top: 0.5rem;
+  color: rgb(255, 45, 45);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------- */
+
+.roomItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.roomItem > *:first-child {
+  display: block;
+  font-size: large;
+  padding: 1rem 1rem;
+  border-radius: 0.5rem;
+
+  width: 100%;
+  margin-right: 1rem;
+
+  cursor: pointer;
+}
+
+.roomItem > *:first-child:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.icon > *:hover {
+  color: var(--third-color);
+}
+
+.selected {
+  background-color: rgba(255, 255, 255, 0.2);
+}

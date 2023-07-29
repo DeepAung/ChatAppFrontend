@@ -1,0 +1,41 @@
+.container {
+  height: 90vh;
+  height: 90dvh;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+}
+
+.messageContainer {
+  overflow-y: scroll;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--fourth-color) #0000006e;
+}
+
+.messageContainer::-webkit-scrollbar {
+  background-color: rgba(0, 0, 0, 0);
+  width: 8px;
+}
+
+.messageContainer::-webkit-scrollbar-thumb {
+  background-color: var(--fourth-color);
+  border-radius: 1rem;
+}
+
+.messageContainer::-webkit-scrollbar-track {
+  background-color: #0000006e;
+  border-radius: 1rem;
+}
+
+.chatarea {
+  resize: none;
+  border: none;
+  outline: none;
+
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  font-size: medium;
+  background-color: rgba(255, 255, 255, 0.1);
+}
