@@ -14,25 +14,26 @@ export async function fetchData(
   if (useJson)
     bodyData = Object.keys(body).length == 0 ? null : JSON.stringify(body);
 
-  console.log(process.env.API_URL);
-  
-  const res = await fetch(`http://127.0.0.1:8000/api/${path}`, {
-    method: method,
-    headers: headers,
-    body: bodyData,
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_API_URL}/api/${path}`,
+    {
+      method: method,
+      headers: headers,
+      body: bodyData,
+    }
+  );
 
   let data: any;
   try {
     data = await res.json();
-  } catch(err) {
+  } catch (err) {
     throw {
       error: new Error(res.statusText),
       res,
       data: {},
-    }
+    };
   }
-  
+
   if (res.ok) {
     return data;
   } else {

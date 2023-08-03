@@ -56,9 +56,14 @@ function ChatBody() {
     if (roomId == undefined) return;
 
     if (socket) socket.close();
-    setSocket(new WebSocket(`ws://127.0.0.1:8000/ws/chat/${roomId}/`));
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    setSocket(
+      new WebSocket(
+        `ws://${process.env.NEXT_PUBLIC_API_URL}/ws/chat/${roomId}/`
+      )
+    );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
   useEffect(() => {
