@@ -91,10 +91,9 @@ function MessageItem({ message, changingState, socket, user }: Props) {
       {user && (
         <Link href={`/user/${user?.id}`} className={styles.img}>
           <Image
-            
             src={user?.get_avatar}
-            width={100}
-            height={100}
+            width={1000} // should be lower than this but it doesn't appear on website
+            height={1000}
             alt="profile"
           />
         </Link>

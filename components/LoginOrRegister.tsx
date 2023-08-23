@@ -27,6 +27,7 @@ function LoginOrRegister({ type }: { type: "login" | "register" }) {
     const func = type == "login" ? login : register;
     const errObj = await func(data);
     setErrors(errObj);
+    
   }
 
   function toggleVisibility(e: any) {
@@ -104,7 +105,7 @@ function LoginOrRegister({ type }: { type: "login" | "register" }) {
         )}
 
         <div className={styles.errList}>
-          {Object.entries(errors).map(([key, val], i) => (
+          {errors && Object.entries(errors).map(([key, val], i) => (
             <p key={i}>
               <span>{key}</span>: {val}
             </p>
