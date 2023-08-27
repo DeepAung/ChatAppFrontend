@@ -58,13 +58,18 @@ function MessageItem({ message, changingState, socket, user }: Props) {
 
   function updateMessageHandler(e: any) {
     if (socket == undefined || !contentRef.current) return;
-    if (!(e.key == "Enter" && !e.shiftKey)) return;
+    if (!(e.key == "Enter") || e.shiftKey) return;
 
     const body = { ...message, content: contentRef.current.innerHTML };
 
+    if (body.content.trim() === "") {
+      setChangingId(-1);
+      return;
+    }
+
     fetchData(`messages/${message.id}/`, "PATCH", body, token)
       .then((data) => socket.send(JSON.stringify({ ...data, method: "EDIT" })))
-      .catch((err) => console.log(err));
+      .catch((err) => alert(JSON.stringify(err.data)));
 
     setChangingId(-1);
   }
@@ -75,10 +80,10 @@ function MessageItem({ message, changingState, socket, user }: Props) {
     const result = confirm("Are you sure you want to delete this message?");
     if (result) {
       fetchData(`messages/${message.id}/`, "DELETE", {}, token)
-        .then((data) =>
+        .then(() =>
           socket.send(JSON.stringify({ ...message, method: "DELETE" }))
         )
-        .catch((err) => console.log(err));
+        .catch((err) => alert(JSON.stringify(err.data)));
     }
   }
 

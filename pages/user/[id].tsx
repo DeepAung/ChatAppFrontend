@@ -86,8 +86,11 @@ function UserProfile() {
 
     fetchData(`users/${id}/`, "GET", {}, token)
       .then((data) => setUser(data))
-      .catch((err) => console.log(err));
-  }, [id, token, triggerUseEffect]);
+      .catch((err) => {
+        alert(JSON.stringify(err.data));
+        router.push("/");
+      });
+  }, [router, id, token, triggerUseEffect]);
 
   async function saveEdit(e: any) {
     e.preventDefault();
@@ -104,17 +107,20 @@ function UserProfile() {
 
     const url = `users/${myUser?.user_id}/`;
     fetchData(url, "PATCH", formData, token, false)
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setIsEditing(false);
-        setImageName("Upload an avatar");
+      .then(() => {
+        cancelEdit();
         setTriggerUseEffect(!triggerUseEffect);
-      });
+      })
+      .catch((err) => alert(JSON.stringify(err)));
   }
 
-  async function cancelEdit(e: any) {
-    setIsEditing(false);
+  async function startEditing() {
+    setIsEditing(true);
     setImageName("Upload an avatar");
+  }
+
+  async function cancelEdit() {
+    setIsEditing(false);
   }
 
   // ----------------------------------------- //
@@ -156,11 +162,7 @@ function UserProfile() {
           </div>
 
           {myUser?.user_id == user?.id && (
-            <button
-              onClick={(e) => setIsEditing(true)}
-              title="Edit"
-              type="button"
-            >
+            <button onClick={startEditing} title="Edit" type="button">
               Edit
             </button>
           )}

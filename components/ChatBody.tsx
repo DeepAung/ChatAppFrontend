@@ -40,13 +40,13 @@ function ChatBody() {
       content: e.target.value,
     };
 
+    if (body.content === "") return;
+
     fetchData("messages/", "POST", body, token)
       .then((data) => {
         socket.send(JSON.stringify({ ...data, method: "POST" }));
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => alert(JSON.stringify(err.data)));
 
     e.target.value = "";
   }

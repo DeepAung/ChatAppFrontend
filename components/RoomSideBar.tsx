@@ -29,11 +29,10 @@ function RoomSideBar() {
     }
 
     fetchData(`rooms/${newRoom}/join/`, "POST", {}, token)
-      .then((data) => router.reload())
+      .then(() => router.reload())
       .catch((err) => {
         if (typeof err.data == "string") setError(err.data);
         else setError((err.error as Error).message);
-        console.log(err);
       });
   }
 
@@ -44,19 +43,22 @@ function RoomSideBar() {
           <input
             type="text"
             name="room"
-            aria-label="Join Room"
-            placeholder="Join Room"
+            aria-label="Enter Room ID"
+            placeholder="Enter Room ID"
           />
           <input type="submit" value="Join" />
         </form>
-
         <p className={styles.errMsg}>{error}</p>
       </div>
+
+      <Link href="/room/create" className={styles.createBtn}>
+        Or Create Room
+      </Link>
 
       {rooms?.map((room, index) => (
         <div className={styles.roomItem} key={index}>
           <span
-            onClick={() => router.push(`?room=${room.id}`)}
+            onClick={() => router.push(`/?room=${room.id}`)}
             className={roomId == room.id ? styles.selected : ""}
           >
             {room.topic}

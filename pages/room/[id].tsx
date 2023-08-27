@@ -48,20 +48,18 @@ function RoomSetting() {
 
     fetchData(`rooms/${id}/`, "GET", {}, token)
       .then((data) => setRoom(data))
-      .catch((err) => console.log(err));
-  }, [id, token, triggerUseEffect]);
+      .catch((err) => {
+        alert(JSON.stringify(err.data));
+        router.push("/");
+      });
+  }, [router, id, token, triggerUseEffect]);
 
   async function saveEdit(e: any) {
     e.preventDefault();
 
-    let a: HTMLSelectElement;
-    const dom = e.target.participants.options;
-    let participants = [];
-    for (let i = 0; i < dom.length; i++) {
-      if (dom[i].selected) {
-        participants.push(dom[i].value);
-      }
-    }
+    const participants = room?.participants.filter(
+      (userId) => e.target[`participants ${userId}`].checked
+    );
 
     const body = {
       topic: e.target.topic.value,
@@ -70,32 +68,35 @@ function RoomSetting() {
     };
 
     fetchData(`rooms/${room?.id}/`, "PATCH", body, token)
-      .catch((err) => console.log(err))
-      .finally(() => {
+      .then(() => {
         setIsEditing(false);
         setTriggerUseEffect(!triggerUseEffect);
+      })
+      .catch((err) => {
+        alert(JSON.stringify(err.data));
+        cancelEdit();
       });
   }
 
-  async function cancelEdit(e: any) {
+  async function cancelEdit() {
     setIsEditing(false);
   }
 
-  async function deleteRoom(e: any) {
+  async function deleteRoom() {
     const result = confirm("Are you sure you want to delete this room?");
     if (result) {
       fetchData(`rooms/${id}/`, "DELETE", {}, token)
-        .catch((err) => console.log(err))
-        .finally(() => router.push("/"));
+        .then(() => router.push("/"))
+        .catch((err) => alert(JSON.stringify(err.data)));
     }
   }
 
-  async function leaveRoom(e: any) {
+  async function leaveRoom() {
     const result = confirm("Are you sure you want to leave this room?");
     if (result) {
       fetchData(`rooms/${id}/leave/`, "POST", {}, token)
-        .catch((err) => console.log(err))
-        .finally(() => router.push("/"));
+        .then(() => router.push("/"))
+        .catch((err) => alert(JSON.stringify(err.data)));
     }
   }
 
@@ -106,29 +107,29 @@ function RoomSetting() {
       {!isEditing ? (
         <div className={styles.info}>
           <div className={styles.section}>
-            <h3>Topic</h3>
-            <p>{"- " + room?.topic}</p>
+            <h3>Topic: {room?.topic}</h3>
+            <li>
+              room ID: <span>{room?.id}</span>
+            </li>
           </div>
 
           <div className={styles.section}>
             <h3>Host</h3>
-            <p className={styles.user}>
-              {"- "}
+            <li className={styles.user}>
               <Link href={`/user/${room?.host}`}>
                 {room ? usersById[room.host]?.username : ""}
               </Link>
-            </p>
+            </li>
           </div>
 
           <div className={styles.section}>
             <h3>Participants</h3>
             {room?.participants.map((userId) => (
-              <p className={styles.user} key={userId}>
-                {"- "}
+              <li className={styles.user} key={userId}>
                 <Link href={`/user/${userId}`}>
                   {usersById[userId]?.username}
                 </Link>
-              </p>
+              </li>
             ))}
           </div>
 
@@ -170,6 +171,21 @@ function RoomSetting() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className={styles.field}>
+              <span>Participants</span>
+              {room?.participants.map((userId) => (
+                <label key={userId}>
+                  <input
+                    defaultChecked
+                    disabled={userId == myUser?.user_id}
+                    type="checkbox"
+                    name={`participants ${userId}`}
+                  />
+                  {usersById[userId].username}
+                </label>
+              ))}
             </div>
           </div>
 

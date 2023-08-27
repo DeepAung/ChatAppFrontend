@@ -23,8 +23,13 @@
   margin-bottom: 0.5rem;
 }
 
-.info p {
+.info li {
   font-size: 1.2rem;
+}
+
+.info li span {
+  color: var(--third-color);
+  font-weight: 600;
 }
 
 .info .section > * {
